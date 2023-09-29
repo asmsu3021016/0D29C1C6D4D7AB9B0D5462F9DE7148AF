@@ -1,43 +1,32 @@
-class Player(object):
-    def __init__(self, name, age, skills, style=None):
-        self.name = name
-        self.age = age
-        self.skills = skills
-        self.style = style
+class Student:
 
-    def get_player(self):
-        print(self.name,self.age,self.skills,self.style)
+  def __init__(self, name, roll_number, cgpa):
+    self.name = name
+    self.roll_number = roll_number
+    self.cgpa = cgpa
 
 
-class Team(object):
-    def __init__(self, name):
-        self.name = name
-        self._players = []
-
-    def add_player(self, obj):
-        if isinstance(obj, Player):
-            self._players.append(obj)
-        else:
-            print("Please provide player object")
-
-    def get_players(self):
-        for player in self._players:
-            player.get_player()
+def sort_students(student_list):
+  # Sort the list of students in descending order of CGPA
+  sorted_students = sorted(student_list,
+                           key=lambda student: student.cgpa,
+                           reverse=True)
+  # Syntax - lambda arg:exp
+  return sorted_students
 
 
-if __name__ == "__main__":
+# Example usage:
+students = [
+    Student("Hari", "A123", 7.8),
+    Student("Srikanth", "A124", 8.9),
+    Student("Saumya", "A125", 9.1),
+    Student("Mahidhar", "A126", 9.9),
+]
 
-    p1 = Player("Mahendra", 46, "Wicket Kipper", "Right-Hand Batsman")
-    p2 = Player("Sachin", 35, "Batsman", "Right-Hand Batsman")
-    p3 = Player("Saurabh", 44, "Batsman", "Left-Hand Batsman")
-    p4 = Player("Zahir", 38, "Bauwller", "Medium Pace Bauwller")
-    p5 = Player("Yuvraj", 43, "All rounder")
+sorted_students = sort_students(students)
 
-    t = Team("India")
-    t.add_player(p1)
-    t.add_player(p2)
-    t.add_player(p3)
-    t.add_player(p4)
-    t.add_player(p5)
-
-    t.get_players()
+# Print the sorted list of students
+for student in sorted_students:
+  print("Name: {}, Roll Number: {}, CGPA: {}".format(student.name,
+                                                     student.roll_number,
+                                                     student.cgpa))
